@@ -18,6 +18,7 @@ class Event(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
+    type_of_place = models.ForeignKey('PlaceType', on_delete=models.SET_NULL, null=True)
     description = models.TextField()
 
     def __str__(self):
