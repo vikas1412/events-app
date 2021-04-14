@@ -6,6 +6,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('events/', include('event.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 
     path('', RedirectView.as_view(url="events/", permanent=True)),
 ]
