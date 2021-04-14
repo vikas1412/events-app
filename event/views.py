@@ -11,6 +11,18 @@ def index(request):
     return render(request, 'events/index.html')
 
 
+class EventsListView(generic.ListView):
+    model = Event
+    template_name = 'events/events.html'
+    context_object_name = 'events'
+
+
+class EventsDetailView(generic.DetailView):
+    model = Event
+    template_name = 'events/event.html'
+    context_object_name = 'event'
+
+
 class NewPlaceCreateView(generic.CreateView):
     model = PlaceType
     template_name = 'events/new-place.html'
