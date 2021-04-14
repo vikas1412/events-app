@@ -7,6 +7,7 @@ urlpatterns = [
     path('', views.index, name="index"),
 
     path('all/', EventsListView.as_view(), name="events"),
+    path('event/<int:pk>/', views.EventsDetailView.as_view(), name="event"),
 
     path('add/place-type/', views.NewPlaceCreateView.as_view(), name="new-place"),
 
