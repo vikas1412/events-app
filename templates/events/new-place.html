@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block style %}
+    #mapid { height: 100%; max-width: 99%; }
+    #id_place_type{
+    padding: 12px;
+    margin-bottom: 22px;
+    font-size: 20px;
+    border: 1px solid lightgrey;
+    background-color:white;
+    margin-top: 1%;
+    }
+
+    #id_description{
+    margin-bottom: 4%;
+    }
+{% endblock %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-between">
+        <h1 style="color: #5E5694">Create a new place!</h1>
+        <a href="{% url 'events' %}"> <span style="color: darkgrey;">Browse events</span></a>
+    </div>
+
+    <form method="post">
+    {% csrf_token %}
+        <div class="container border mt-4 pt-2 mb-5">
+            <ul class="list-group list-group-flush">
+
+                <div class="sm-col-12 d-flex justify-content-between">
+                <span>
+                    <span style="float: left"> {{ form.place_type.name|capfirst }}</span>
+                </span>
+                    <span><a style="float:right;" href="{% url 'new-event' %}">Add new place</a></span>
+                </div>
+                {{ form.place_type }}
+                <button class="btn btn-primary">Create now</button>
+
+            </ul>
+        </div>
+    </form>
+
+{% endblock %}

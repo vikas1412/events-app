@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block style %}
+    #mapid { height: 100%; max-width: 99%; }
+    #id_title, #id_tags, #id_address, #id_phone, #id_city{
+    padding: 12px;
+    margin-bottom: 22px;
+    font-size: 20px;
+    border: 1px solid lightgrey;
+    background-color:white;
+    margin-top: 1%;
+    }
+
+    #id_description{
+    margin-bottom: 4%;
+    }
+{% endblock %}
+
+{% block links %}
+    {{ form.media }}
+{% endblock %}
+
+
+{% block body %}
+    <div class="d-flex justify-content-between">
+
+        <h1 style="color: #5E5694">Create a new place on maps now!</h1>
+        <span><a class="btn btn-outline border" href="{% url 'new-event' %}">Add an event</a></span>
+
+    </div>
+
+    <form action="#" method="post">
+        {% csrf_token %}
+        {{ form.model }}
+        <div class="container border mt-4 pt-2 mb-5">
+            <ul class="list-group list-group-flush">
+
+                {{ form.title.name|capfirst }}
+                {{ form.title }}
+
+                {{ form.location.name|capfirst }}
+                <div style="width: 100%; min-width: 400px">
+
+                    {{ form.location }}
+                </div>
+
+                {{ form.description.name|capfirst }}
+                {{ form.description }}
+
+
+                <div class="row g-3 mb-2">
+                    <div class="col-md-6">
+                        <label for="inputEmail4" class="form-label">Your address</label>
+                        <input type="text" name="{{ form.address.name }}" class="form-control"
+                               id="id_{{ form.address.name|lower }}" placeholder="Enter your address">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputPassword4" class="form-label">Enter tags</label>
+                        <input type="text" name="{{ form.tags.name }}" class="form-control"
+                               id="id_{{ form.tags.name|lower }}" placeholder="Tags seperated by , (eg. Tag 1, Tag 2)">
+                    </div>
+                </div>
+
+
+                <div class="row g-3 mb-2">
+                    <div class="col-md-6">
+                        <label for="inputEmail4" class="form-label">Phone number</label>
+                        <input type="number" name="{{ form.phone.name }}" class="form-control"
+                               id="id_{{ form.phone.name|lower }}">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputPassword4" class="form-label">City</label>
+                        <input type="text" name="{{ form.city.name }}" class="form-control"
+                               id="id_{{ form.city.name|lower }}">
+                    </div>
+                </div>
+
+
+            </ul>
+            <button type="submit" class="mb-3 btn btn-outline btn-primary">Add place</button>
+        </div>
+    </form>
+
+{% endblock %}
