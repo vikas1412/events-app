@@ -144,9 +144,3 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Activating Heroku Django
 django_heroku.settings(locals())
-
-import dj_database_url
-DATABASES['default'] = dj_database_url.config()
-
-GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH')
-GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
