@@ -50,3 +50,22 @@ class PlacesListView(generic.ListView):
     model = Place
     template_name = 'events/places.html'
     context_object_name = 'places'
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password1 = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password1)
+            if user is not None:
+                login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+                return redirect('index')
+            else:
+                return HttpResponse("Invalid username & password")
+
+    else:
+        form = SignUpForm()
+    return render(request, 'registration/signup.html', {'form': form})
