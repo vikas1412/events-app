@@ -23,6 +23,13 @@ class EventsDetailView(generic.DetailView):
     context_object_name = 'event'
 
 
+class NewEventCreateView(generic.CreateView):
+    model = Event
+    template_name = 'events/new-event.html'
+    fields = ['title', 'place', 'type_of_place', 'tags', 'description', 'time_start', 'time_end']
+    context_object_name = 'new_event'
+
+
 class NewPlaceCreateView(generic.CreateView):
     model = PlaceType
     template_name = 'events/new-place.html'
@@ -43,4 +50,3 @@ class PlacesListView(generic.ListView):
     model = Place
     template_name = 'events/places.html'
     context_object_name = 'places'
-

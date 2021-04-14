@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block style %}
+    #mapid { height: 100%; max-width: 99%; }
+    #id_title, #id_place, #id_tags, #id_type_of_place, #id_description, #id_time_start, #id_time_end{
+    padding: 12px;
+    margin-bottom: 22px;
+    font-size: 20px;
+    border: 1px solid lightgrey;
+    background-color:white;
+    margin-top: 1%;
+    }
+    #id_type_of_place{
+    width:100%;
+    }
+    #id_place{
+    width: 100%;
+    }
+
+    #id_description{
+    margin-bottom: 4%;
+    }
+{% endblock %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-between">
+
+        <h1 style="color: #5E5694">Create a new event now!</h1>
+        <a href="{% url 'events' %}"><span style="color: darkgrey;">Browse events</span></a>
+    </div>
+
+    <form method="post" action="#">
+        {% csrf_token %}
+        <div class="container border mt-4 pt-2 mb-5">
+            <ul class="list-group list-group-flush">
+
+                {% if form.errors %}
+                    <p style="color: red">
+                        Please correct the error{{ form.errors|pluralize }} below.
+                    </p>
+                {% endif %}
+
+                {{ form.title.name|capfirst }}
+                {{ form.title }}
+
+                <div class="row g-3 mb-2">
+                    <div class="col-md-6">
+                        <label for="inputEmail4" class="form-label">Enter place type</label>
+                        <span><a style="float:right;" href="{% url 'new-place' %}">Add new place type</a></span>
+                        {{ form.type_of_place }}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputPassword4" class="form-label">Select Place</label>
+                        <span><a style="float:right;" href="{% url 'new-place' %}">Add new place type</a></span>
+                        {{ form.place }}
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-2">
+                    <div class="col-md-6">
+                        <label for="inputEmail4" class="form-label">Start time</label>
+                        <input type="time" name="{{ form.time_start.name }}" class="form-control"
+                               id="id_{{ form.time_start.name|lower }}">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputPassword4" class="form-label">End time</label>
+                        <input type="time" name="{{ form.time_end.name }}" class="form-control"
+                               id="id_{{ form.time_end.name|lower }}">
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="inputPassword4" class="form-label">Enter tags</label>
+                    <input type="text" name="{{ form.tags.name }}" class="form-control"
+                           id="id_{{ form.tags.name|lower }}" placeholder="Tags seperated by , (eg. Tag 1, Tag 2)">
+                </div>
+
+                {{ form.description.name|capfirst }}
+                {{ form.description }}
+            </ul>
+            <button class="mb-3 btn btn-sm btn-primary">Add event</button>
+        </div>
+
+    </form>
+
+{% endblock %}
