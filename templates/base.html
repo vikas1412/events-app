@@ -72,6 +72,13 @@
                     </ul>
                 </li>
             </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0 col-sm-3">
+                {% if user.is_authenticated %}
+                <li class="btn btn-outline border-danger btn-sm ">
+                    <span style="color: gray">Logged in as:</span> {{ request.user }}
+                </li>
+                {% endif %}
+            </ul>
             <ul class="navbar-nav mb-2 mb-lg-0 col-sm-4">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{% url 'events' %}">Browse events</a>
