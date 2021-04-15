@@ -33,14 +33,19 @@ class EventsDetailView(generic.DetailView):
 class NewEventCreateView(LoginRequiredMixin, generic.CreateView):
     model = Event
     template_name = 'events/new-event.html'
-    fields = ['title', 'place', 'type_of_place', 'date', 'tags', 'description', 'time_start', 'time_end']
+    fields = ['title', 'place', 'all_day', 'type_of_place', 'date', 'tags', 'description', 'time_start', 'time_end']
     context_object_name = 'new_event'
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
 
         year, month, day = str(form.instance.date).split('-')
-        print(year, '\n', month, '\n', day)
+
+        all_day = form.instance.all_day
+        if not all_day:
+            form.instance.all_day = False
+        elif all_day == True:
+            form.instance.all_day == True
 
         form.instance.year = int(year)
         form.instance.month = int(month)
@@ -54,15 +59,16 @@ class NewPlaceCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = 'events/new-place.html'
     fields = ['place_type']
     context_object_name = 'new_place'
-    success_url = '/events/places/'
+    success_url = '/'
 
 
 class NewPlaceDetailCreateView(LoginRequiredMixin, generic.CreateView):
+
     model = Place
     template_name = 'events/new-place-detail.html'
     fields = ['title', 'type_of_place', 'tags', 'location', 'description', 'address', 'phone', 'city']
     context_object_name = 'new_place'
-    success_url = '/events/places/'
+    success_url = '/'
 
 
 class PlacesListView(generic.ListView):
@@ -93,7 +99,6 @@ def signup(request):
 def filter_events(request):
 
     events = Event.objects.all()
-    print(events)
     event_filter = EventFilter(request.GET, queryset=events)
     events = event_filter.qs
 
