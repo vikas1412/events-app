@@ -44,8 +44,8 @@ class NewEventCreateView(LoginRequiredMixin, generic.CreateView):
         all_day = form.instance.all_day
         if not all_day:
             form.instance.all_day = False
-        elif all_day == True:
-            form.instance.all_day == True
+        elif all_day is True:
+            form.instance.all_day = True
 
         form.instance.year = int(year)
         form.instance.month = int(month)
