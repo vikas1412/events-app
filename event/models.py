@@ -38,17 +38,22 @@ class Event(models.Model):
     place = models.ForeignKey(Place, on_delete=models.SET_NULL, null=True)
     tags = TaggableManager(blank=True)
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    date = models.DateField(auto_now=True, null=True)
+    date = models.DateField(auto_now=False, null=True)
+
+    year = models.IntegerField(blank=True, default=None, null=True)
+    month = models.IntegerField(blank=True, default=None, null=True)
+    day = models.IntegerField(blank=True, default=None, null=True)
+
     time_start = models.TimeField(null=True, blank=True)
     time_end = models.TimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
     type_of_place = models.ForeignKey('PlaceType', on_delete=models.SET_NULL, null=True)
     description = models.TextField()
+    all_day = models.BooleanField(default=False)
 
     def get_absolute_url(self):
         return reverse('event', args=[str(self.id)])
-
 
     def __str__(self):
         return self.title
