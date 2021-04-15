@@ -50,7 +50,7 @@ class Event(models.Model):
     updated_at = models.DateTimeField(auto_now=True, null=True)
     type_of_place = models.ForeignKey('PlaceType', on_delete=models.SET_NULL, null=True)
     description = models.TextField()
-    all_day = models.BooleanField(default=False)
+    all_day = models.BooleanField(blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse('event', args=[str(self.id)])
