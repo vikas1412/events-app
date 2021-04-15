@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block style %}
+    #mapid { height: 100%; max-width: 99%; }
+    #id_place_type{
+    padding: 12px;
+    margin-bottom: 22px;
+    font-size: 20px;
+    border: 1px solid lightgrey;
+    background-color:white;
+    margin-top: 1%;
+    }
+
+    #id_description{
+    margin-bottom: 4%;
+    }
+{% endblock %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-between">
+        <h1 style="color: #5E5694">Filter events by day, month & year.</h1>
+        <a href="{% url 'events' %}"> <span style="color: darkgrey;">Search by filters</span></a>
+    </div>
+
+    <form method="get">
+        <div class="container border mt-4 pt-2 mb-5">
+            <ul class="list-group list-group-flush">
+
+                <form method="get">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="inputEmail4" class="form-label">Date</label>
+
+                            {{ filter.form.year }}
+                        </div>
+                        <div class="col-md-4">
+                            <label for="inputPassword4" class="form-label">Month</label>
+
+                            {{ filter.form.month }}
+
+                        </div>
+                        <div class="col-md-4">
+                            <label for="inputPassword4" class="form-label">Year</label>
+                            {{ filter.form.day }}
+
+                        </div>
+                    </div>
+                    <button class="col-3 mt-3 btn btn-outline border-danger">Filter</button>
+                </form>
+
+                {% for event in events %}
+                    <p>Title: {{ event.title }}</p>
+                    <p>Description: {{ event.description|truncatechars:'100' }}</p>
+                    <p>Place type: {{ event.type_of_place }}</p>
+                    <p>Date: {{ event.date }}</p>
+
+                    <hr>
+                {% endfor %}
+
+
+
+                <div class="sm-col-12 mt-4 mb-4 d-flex justify-content-between">
+                <span>
+                {{ form.place_type }}
+                <button class="btn btn-primary">Filter</button>
+                </span>
+                    <span><a style="float:right;" href="{% url 'new-event' %}">Add new place</a></span>
+                </div>
+
+
+            </ul>
+        </div>
+    </form>
+
+{% endblock %}
