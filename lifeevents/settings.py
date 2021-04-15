@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'event.apps.EventConfig',
     'taggit',
     'django.contrib.gis',
+    'django_filters'
 ]
 
 MIDDLEWARE = [
@@ -93,10 +94,10 @@ WSGI_APPLICATION = 'lifeevents.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'd1k903cu3ct58q',
-        'USER': 'xfpnfuzleqhtjg',
-        'PASSWORD': '39732141b664cb16785ffb8e2938ce26c5f21eb65438c17f2ceb77a6ad15dce6',
-        'HOST': 'ec2-34-225-103-117.compute-1.amazonaws.com',
+        'NAME': 'd8io069vit3for',
+        'USER': 'uvzsldvwbchtts',
+        'PASSWORD': '04a616a29f8f712b42e869c00c13a79c7df366900cb835fb593024cc301ba448',
+        'HOST': 'ec2-54-196-33-23.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
