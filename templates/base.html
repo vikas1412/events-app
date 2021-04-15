@@ -74,9 +74,9 @@
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0 col-sm-3">
                 {% if user.is_authenticated %}
-                <li class="btn btn-outline border-danger btn-sm ">
-                    <span style="color: gray">Logged in as:</span> {{ request.user }}
-                </li>
+                    <li class="btn btn-outline border-danger btn-sm ">
+                        <span style="color: gray">Logged in as:</span> {{ request.user }}
+                    </li>
                 {% endif %}
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0 col-sm-4">
@@ -98,12 +98,12 @@
 <div class="container">
     <div class="row mt-4">
         <div class="col-lg-3  col-md-12 mt-5 col-sm-12">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item text-center">An item</li>
-                <li class="list-group-item text-center">A second item</li>
-                <li class="list-group-item text-center">A third item</li>
-                <li class="list-group-item text-center">A fourth item</li>
-                <li class="list-group-item text-center">And a fifth one</li>
+            <ul class="list-group list-group-flush" {% block visibility %}{% endblock %}>
+                <li class="list-group-item text-center"><a href="{% url 'events' %}"> Browse events</a></li>
+                <li class="list-group-item text-center"><a href="{% url 'new-event' %}"> Add an event</a></li>
+                <li class="list-group-item text-center"><a href="{% url 'filter' %}"> Search by filter</a></li>
+                <li class="list-group-item text-center"><a href="{% url 'new-place' %}"> Add location type</a></li>
+                <li class="list-group-item text-center"><a href="{% url 'new-place-detail' %}"> Add new place</a></li>
             </ul>
         </div>
 

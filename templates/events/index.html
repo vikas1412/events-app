@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block visibility %}
+    style="visibility: hidden"
+{% endblock %}
+
 {% block body %}
     <h1 style="color: #5E5694">GoEvents help you to add an event and do a lot more stuff!</h1>
     <div class="container border mt-4">
@@ -9,9 +13,9 @@
         <div class="text-center card col-4">
 
             <div class="card-body">
-                <h5 class="card-title">Events</h5>
-                <div class="text-center"><a href="{% url 'events' %}" class="btn btn-outline border-warning">Browse
-                    events</a></div>
+                <h5 class="card-title">Browse Events</h5>
+                <div class="text-center"><a href="{% url 'events' %}" class="btn btn-outline border-warning">See
+                    Events</a></div>
             </div>
         </div>
 
@@ -20,22 +24,24 @@
             <div class="card-body">
 
                 <h5 class="card-title">Add an event</h5>
-                <div class="text-center"><a href="{% url 'new-event' %}" class="btn btn-outline border-warning">Create a
-                    new event</a></div>
+                <div class="text-center"><a href="{% url 'new-event' %}" class="btn btn-outline border-warning">New
+                    event</a></div>
             </div>
         </div>
         <div class="text-center card col-4">
 
             <div class="card-body">
-                <h5 class="card-title">Search by filter</h5>
-                <div class="text-center"><a href="{% url 'filter' %}" class="btn btn-outline border-warning">Search</a></div>
+                <h5 class="card-title">Apply filter</h5>
+                <div class="text-center"><a href="{% url 'filter' %}" class="btn btn-outline border-warning">Search
+                    event</a></div>
             </div>
         </div>
         <div class="text-center card col-4">
 
             <div class="card-body">
                 <h5 class="card-title">Add Location type</h5>
-                <div class="text-center"><a href="{% url 'new-place' %}" class="btn btn-outline border-warning">Add location</a></div>
+                <div class="text-center"><a href="{% url 'new-place' %}" class="btn btn-outline border-warning">Add
+                    location</a></div>
             </div>
         </div>
 
@@ -43,7 +49,8 @@
 
             <div class="card-body">
                 <h5 class="card-title">Add a new place</h5>
-                <div class="text-center"><a href="{% url 'new-place-detail' %}" class="btn btn-outline border-warning">Add place</a></div>
+                <div class="text-center"><a href="{% url 'new-place-detail' %}" class="btn btn-outline border-warning">Add
+                    place</a></div>
             </div>
         </div>
 
@@ -51,7 +58,8 @@
 
             <div class="card-body">
                 <h5 class="card-title">Browse saved places</h5>
-                <div class="text-center"><a href="{% url 'places' %}" class="btn btn-outline border-warning">Browse places</a></div>
+                <div class="text-center"><a href="{% url 'places' %}" class="btn btn-outline border-warning">Browse
+                    places</a></div>
             </div>
         </div>
     </div>
