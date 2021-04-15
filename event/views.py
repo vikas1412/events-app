@@ -96,7 +96,7 @@ def filter_events(request):
     print(events)
     event_filter = EventFilter(request.GET, queryset=events)
     events = event_filter.qs
- 
+
     params = {
         'filter': event_filter,
         'events': events,
