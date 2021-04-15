@@ -16,6 +16,7 @@ urlpatterns = [
     path('add/place/', views.NewPlaceDetailCreateView.as_view(), name="new-place-detail"),
 
     path('signup/', views.signup, name="signup"),
+    path('filter/', views.filter_events, name="filter"),
 
     path('places/', views.PlacesListView.as_view(), name="places"),
 ]
