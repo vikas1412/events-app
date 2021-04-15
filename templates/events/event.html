@@ -20,7 +20,7 @@
         <span>
             <h1 style="color: #5E5694">{{ event.title }}</h1>
             {% for tag in event.tags.all %}
-            <span style="font-weight: normal; font-size: small" class="badge bg-dark">{{ tag }}</span>
+                <span style="font-weight: normal; font-size: small" class="badge bg-dark">{{ tag }}</span>
             {% endfor %}
         </span>
 
@@ -37,7 +37,14 @@
                 <span><strong>Event type:</strong><br>{{ event.type_of_place }}</span>
             </div>
             <strong>Event Duration:</strong>
-            <span style="color:orange;">({{ event.time_start }} to {{ event.time_end }})</span>
+
+            <span style="color:orange;">
+                {% if event.all_day == True %}
+                    (All day)
+                {% else %}
+                    ({{ event.time_start }} to {{ event.time_end }})
+                {% endif %}
+            </span>
 
             <strong class="mt-3">Last updated:</strong>
             <span>{{ event.updated_at }}</span>

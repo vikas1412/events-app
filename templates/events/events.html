@@ -48,7 +48,11 @@
 
                                         {% endfor %}
                                         <br>
-                                        ({{ event.time_start }} - {{ event.time_end }})
+                                        {% if event.all_day == True %}
+                                            (All day)
+                                        {% else %}
+                                            ({{ event.time_start }} - {{ event.time_end }})
+                                        {% endif %}
                                     </div>
                                 {% else %}
                                     <div>

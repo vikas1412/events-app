@@ -43,6 +43,7 @@
                         Please correct the error{{ form.errors|pluralize }} below.
                     </p>
                 {% endif %}
+                <span style="color: #e35f5f"> {{ form.errors }}</span>
 
                 {{ form.title.name|capfirst }}
                 {{ form.title }}
@@ -60,17 +61,38 @@
                     </div>
                 </div>
 
-                <div class="row g-3 mb-2">
-                    <div class="col-md-6">
-                        <label for="inputEmail4" class="form-label">Start time</label>
-                        <input type="time" name="{{ form.time_start.name }}" class="form-control"
-                               id="id_{{ form.time_start.name|lower }}">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="inputPassword4" class="form-label">End time</label>
-                        <input type="time" name="{{ form.time_end.name }}" class="form-control"
-                               id="id_{{ form.time_end.name|lower }}">
-                    </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="{{ form.all_day.name }}" id="flexRadioDefault1"
+                           value="True">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        All day
+                    </label>
+                </div>
+
+                <div class="form-check col-12">
+                    <input class="form-check-input" type="radio" name="{{ form.all_day.name }}" value="False" id="flexRadioDefault2" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Custom timings
+                        <hr>
+                        <div class="row g-3 mb-2">
+                            <div class="col-md-6">
+                                <label for="inputEmail4" class="form-label">Start time</label>
+                                <input type="time" name="{{ form.time_start.name }}" class="form-control"
+                                       id="id_{{ form.time_start.name|lower }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputPassword4" class="form-label">End time</label>
+                                <input type="time" name="{{ form.time_end.name }}" class="form-control"
+                                       id="id_{{ form.time_end.name|lower }}">
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="inputPassword4" class="form-label">Enter Date of event</label>
+                    <input type="date" name="{{ form.date.name }}" class="form-control"
+                           id="id_{{ form.date.name|lower }}" placeholder="Set Date of event">
                 </div>
 
                 <div class="col-md-12">
