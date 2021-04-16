@@ -147,3 +147,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Activating Heroku Django
 django_heroku.settings(locals())
 DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/'
