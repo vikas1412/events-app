@@ -13,34 +13,10 @@
                     {% for place in places %}
 
                         <div class="p-1 border text-center card col-6">
-                            <div id="mapid-{{ forloop.counter }}" style="width: 100%; height: 300px;"></div>
-                            <script type="text/javascript">
-
-                                var mymap = L.map('mapid-{{ forloop.counter }}').setView({{ place.lat_lon }}, 16);
-
-                                L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-                                    maxZoom: 10,
-                                    id: 'mapbox/streets-v11',
-                                    tileSize: 512,
-                                    zoomOffset: -1
-                                }).addTo(mymap);
-
-                                L.marker({{ place.lat_lon }}).addTo(mymap).bindPopup('{{ place }}');
-
-                                L.circle({{ place.lat_lon }}, {
-                                    color: 'red',
-                                    fillColor: '#f03',
-                                    fillOpacity: 0.5,
-                                    radius: 50
-                                }).addTo(mymap);
-
-                                L.polygon([]).addTo(mymap);
-
-
-                            </script>
-
                             <div class="card-body p-1">
                                 <p class="card-title">{{ place.title }}</p>
+                                <p style="color: darkgrey">{{ place.description|truncatechars:'120' }}</p>
+
                                 {% for tag in place.tags.all %}
                                     <span style="font-weight: normal; font-size: small"
                                           class="badge bg-dark">{{ tag }}</span>
