@@ -10,7 +10,7 @@ urlpatterns = [
     path('event/<int:pk>/', views.EventsDetailView.as_view(), name="event"),
 
 
-    path('add/event/', views.NewEventCreateView.as_view(), name="new-event"),
+    path('add/event/', views.new_event, name="new-event"),
     path('add/place-type/', views.NewPlaceCreateView.as_view(), name="new-place"),
 
     path('add/place/', views.NewPlaceDetailCreateView.as_view(), name="new-place-detail"),
