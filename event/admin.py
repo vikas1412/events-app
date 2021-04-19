@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.contrib.gis.admin import OSMGeoAdmin
 
-from event.models import Event, PlaceType, Place
+from event.models import Event, PlaceType, Place, EventTime
 
 admin.site.register(PlaceType)
+admin.site.register(EventTime)
 
 
 @admin.register(Event)
