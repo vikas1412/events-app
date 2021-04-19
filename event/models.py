@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.gis.db import models
 from django.urls import reverse
 from taggit.managers import TaggableManager
+import model_utils.models
 
 
 class PlaceType(models.Model):
@@ -11,7 +12,7 @@ class PlaceType(models.Model):
         return self.place_type
 
 
-class Place(models.Model):
+class Place(model_utils.models.TimeStampedModel):
     title = models.CharField(max_length=200)
     location = models.PointField(null=True, blank=True)
     tags = TaggableManager(blank=True)
@@ -44,8 +45,6 @@ class Event(models.Model):
     month = models.IntegerField(blank=True, default=None, null=True)
     day = models.IntegerField(blank=True, default=None, null=True)
 
-    time_start = models.TimeField(null=True, blank=True)
-    time_end = models.TimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
     type_of_place = models.ForeignKey('PlaceType', on_delete=models.SET_NULL, null=True)
@@ -61,3 +60,9 @@ class Event(models.Model):
     @property
     def lat_lon(self):
         return list(getattr(self.place, 'coords', [])[::-1])
+
+
+class EventTime(models.Model):
+    event = models.ForeignKey('Event', on_delete=models.CASCADE)
+    time_start = models.TimeField(null=True, blank=True)
+    time_end = models.TimeField(null=True, blank=True)
