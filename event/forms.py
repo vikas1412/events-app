@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Event
 
 
 class SignUpForm(UserCreationForm):
@@ -12,3 +13,15 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
 
+
+class EventForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = ('title', 'place', 'tags', 'all_day', 'created_by', 'date', 'time_start', 'time_end', 'type_of_place', 'description')
+
+    def clean(self):
+        if self.cleaned_data['all_day']:
+            self.cleaned_data['time_start'] = ''
+            self.cleaned_data['time_end'] = ''
+
+        return self.cleaned_data
