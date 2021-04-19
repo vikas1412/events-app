@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Event
+from .models import Event, EventTime
 
 
 class SignUpForm(UserCreationForm):
@@ -17,11 +17,17 @@ class SignUpForm(UserCreationForm):
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ('title', 'place', 'tags', 'all_day', 'created_by', 'date', 'time_start', 'time_end', 'type_of_place', 'description')
+        fields = ('title', 'place', 'tags', 'all_day', 'created_by', 'date', 'type_of_place', 'description')
 
-    def clean(self):
-        if self.cleaned_data['all_day']:
-            self.cleaned_data['time_start'] = ''
-            self.cleaned_data['time_end'] = ''
+    # def clean(self):
+    #     if self.cleaned_data['all_day']:
+    #         self.cleaned_data['time_start'] = ''
+    #         self.cleaned_data['time_end'] = ''
+    #
+    #     return self.cleaned_data
 
-        return self.cleaned_data
+
+class ImageUrlForm(forms.ModelForm):
+    class Meta:
+        model = EventTime
+        fields = ('time_start', 'time_end')

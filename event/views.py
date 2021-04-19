@@ -1,12 +1,14 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import transaction
+from django.forms import formset_factory
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import generic
 
 from event.filters import EventFilter
-from event.forms import SignUpForm
+from event.forms import SignUpForm, EventForm, ImageUrlForm
 from event.models import Event, Place, PlaceType
 
 
@@ -19,6 +21,10 @@ class EventsListView(generic.ListView):
     template_name = 'events/events.html'
     context_object_name = 'events'
 
+    def get_ordering(self):
+        ordering = self.request.GET.get('ordering', '-updated_at')
+        return ordering
+
 
 class EventsDetailView(generic.DetailView):
     model = Event
@@ -30,10 +36,43 @@ class EventsDetailView(generic.DetailView):
         return context
 
 
+@transaction.atomic
+@login_required
+def new_event(request):
+    form = EventForm(request.POST or None)
+
+    EventTimingSet = formset_factory(ImageUrlForm, extra=2)
+    event_timing_set = EventTimingSet(request.POST or None)
+
+    if form.is_valid():
+        form_obj = form.save(commit=False)
+
+        year, month, day = str(form_obj.date).split('-')
+        form_obj.year = int(year)
+        form_obj.month = int(month)
+        form_obj.day = int(day)
+        this_form_object = form_obj.save()
+        form.save_m2m()
+
+        for event_timing_form in event_timing_set:
+            if event_timing_form.is_valid():
+                event_timing_form_obj = event_timing_form.save(commit=False)
+                event_timing_form_obj.event = form_obj
+                event_timing_form_obj.save()
+
+        return redirect('event', form_obj.id)
+
+    params = {
+        'form': form,
+        'event_timing_form': event_timing_set,
+    }
+    return render(request, 'events/new-event.html', params)
+
+
 class NewEventCreateView(LoginRequiredMixin, generic.CreateView):
-    model = Event
+    model = EventForm
     template_name = 'events/new-event.html'
-    fields = ['title', 'place', 'all_day', 'type_of_place', 'date', 'tags', 'description', 'time_start', 'time_end']
+    fields = ['__all__']
     context_object_name = 'new_event'
 
     def form_valid(self, form):
